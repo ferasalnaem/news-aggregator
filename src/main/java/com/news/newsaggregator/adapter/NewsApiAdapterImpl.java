@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Component
@@ -50,7 +53,7 @@ public class NewsApiAdapterImpl implements NewsApiAdapter {
                     article.setDescription(articleJson.optString("description"));
                     article.setContent(articleJson.optString("content"));
                     article.setAuthor(articleJson.optString("author"));
-                    article.setPublishedAt(articleJson.optString("publishedAt"));
+                    article.setPublishedAt(convertStringToDate(articleJson.optString("publishedAt")));
                     article.setUrl(articleJson.optString("url"));
                     article.setSource(articleJson.getJSONObject("source").optString("name"));
 
@@ -76,6 +79,19 @@ public class NewsApiAdapterImpl implements NewsApiAdapter {
         // Simple method for making an HTTP request (this would be expanded in a real implementation)
         // It makes a GET request and returns the response as a String.
         return ""; // Placeholder
+    }
+
+    private Date convertStringToDate(String publishedAtString) {
+
+        Date publishedAtDate;
+        // Convert publishedAt from String to Date
+        try {
+            SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            publishedAtDate = isoFormat.parse(publishedAtString);
+        } catch (ParseException e) {
+            throw new RuntimeException("Invalid date format in API response: " + publishedAtString, e);
+        }
+        return publishedAtDate;
     }
 }
 

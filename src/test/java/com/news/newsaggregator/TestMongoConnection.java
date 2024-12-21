@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,7 +24,7 @@ public class TestMongoConnection {
     private UncategorizedArticleRepository repository;
 
     @Test
-    void testSaveAndFetchArticle() {
+    void testSaveAndFetchArticle() throws ParseException {
         // Save a test article
         UncategorizedArticle article = new UncategorizedArticle();
         article.setTitle("Test Article");
@@ -31,7 +33,11 @@ public class TestMongoConnection {
         article.setAuthor("John Doe");
         article.setUrl("http://example.com");
         article.setSource("Example Source");
-        article.setPublishedAt("2024-10-10");
+        // Set the publishedAt date
+        String dateString = "2024-11-11";
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date publishedDate = dateFormat.parse(dateString); // Parse string to Date
+        article.setPublishedAt(publishedDate); // Set the Date object
 
         repository.save(article);
 

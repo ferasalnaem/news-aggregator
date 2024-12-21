@@ -2,6 +2,7 @@ package com.news.newsaggregator.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,7 @@ public class CategorizedArticle {
     private String author;
     private String source;
     private String url;
+    @Field("publishedAt")
     private Date publishedAt;
     private String category; // This field is added after categorization
     private List<String> tags;

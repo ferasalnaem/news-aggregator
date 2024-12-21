@@ -2,6 +2,7 @@ package com.news.newsaggregator.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +17,8 @@ public class UncategorizedArticle {
     private String author;
     private String source;
     private String url;
-    private String publishedAt;
+    @Field("publishedAt")
+    private Date publishedAt;
     private List<String> tags;
     private String imageUrl;
     private final boolean isCategorised = false;
@@ -78,11 +80,11 @@ public class UncategorizedArticle {
         this.url = url;
     }
 
-    public String getPublishedAt() {
+    public Date getPublishedAt() {
         return publishedAt;
     }
 
-    public void setPublishedAt(String publishedAt) {
+    public void setPublishedAt(Date publishedAt) {
         this.publishedAt = publishedAt;
     }
 
