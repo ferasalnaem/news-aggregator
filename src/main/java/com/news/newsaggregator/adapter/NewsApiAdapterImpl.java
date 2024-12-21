@@ -55,6 +55,7 @@ public class NewsApiAdapterImpl implements NewsApiAdapter {
                     article.setAuthor(articleJson.optString("author"));
                     article.setPublishedAt(convertStringToDate(articleJson.optString("publishedAt")));
                     article.setUrl(articleJson.optString("url"));
+                    article.setUrlToImage(articleJson.optString("urlToImage"));
                     article.setSource(articleJson.getJSONObject("source").optString("name"));
 
                     // Add to the list of articles.

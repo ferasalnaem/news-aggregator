@@ -17,6 +17,7 @@ public class CategorizedArticle {
     private String author;
     private String source;
     private String url;
+    private String urlToImage;
     @Field("publishedAt")
     private Date publishedAt;
     private String category; // This field is added after categorization
@@ -77,6 +78,14 @@ public class CategorizedArticle {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getUrlToImage() {
+        return urlToImage;
+    }
+
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
     }
 
     public Date getPublishedAt() {

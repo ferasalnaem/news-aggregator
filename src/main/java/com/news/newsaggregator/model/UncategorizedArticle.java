@@ -17,6 +17,7 @@ public class UncategorizedArticle {
     private String author;
     private String source;
     private String url;
+    private String urlToImage;
     @Field("publishedAt")
     private Date publishedAt;
     private List<String> tags;
@@ -78,6 +79,14 @@ public class UncategorizedArticle {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getUrlToImage() {
+        return urlToImage;
+    }
+
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
     }
 
     public Date getPublishedAt() {
