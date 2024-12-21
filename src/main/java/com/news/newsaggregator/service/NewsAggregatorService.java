@@ -1,4 +1,4 @@
-package com.news.newsaggregator.aggregator;
+package com.news.newsaggregator.service;
 
 import com.news.newsaggregator.adapter.NewsApiAdapter;
 import com.news.newsaggregator.model.UncategorizedArticle;
@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+This service fetches news from external APIs
+ */
 @Service
 public class NewsAggregatorService {
 
