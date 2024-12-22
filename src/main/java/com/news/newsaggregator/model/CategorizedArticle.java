@@ -23,6 +23,7 @@ public class CategorizedArticle {
     private String category; // This field is added after categorization
     private List<String> tags;
     private String imageUrl;
+    private final boolean isCategorized = true;
 
     public String getId() {
         return id;

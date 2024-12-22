@@ -22,7 +22,7 @@ public class UncategorizedArticle {
     private Date publishedAt;
     private List<String> tags;
     private String imageUrl;
-    private final boolean isCategorised = false;
+    private final boolean isCategorized = false;
 
 
     public String getId() {
