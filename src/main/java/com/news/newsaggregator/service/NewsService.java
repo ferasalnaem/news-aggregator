@@ -11,6 +11,11 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 @Service
@@ -40,7 +45,23 @@ public class NewsService {
             query.addCriteria(Criteria.where("author").regex(author, "i"));
         }
         if (fromDate != null) {
-            query.addCriteria(Criteria.where("publishedAt").gte(fromDate));
+            try {
+                // Parse the input date string
+                LocalDate date = LocalDate.parse(fromDate);
+
+                // Define the start and end of the day
+                LocalDateTime startOfDay = date.atStartOfDay();
+                LocalDateTime endOfDay = date.plusDays(1).atStartOfDay().minusNanos(1);
+
+                // Convert to UTC
+                Instant startInstant = startOfDay.toInstant(ZoneOffset.UTC);
+                Instant endInstant = endOfDay.toInstant(ZoneOffset.UTC);
+
+                // Add range criteria to query
+                query.addCriteria(Criteria.where("publishedAt").gte(startInstant).lte(endInstant));
+            } catch (DateTimeParseException e) {
+                throw new IllegalArgumentException("Invalid date format for 'fromDate'. Expected format: yyyy-MM-dd", e);
+            }
         }
 
         // Add sorting
