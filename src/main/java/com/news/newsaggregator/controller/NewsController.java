@@ -25,11 +25,13 @@ public class NewsController {
             @RequestParam(required = false) String category,
             @RequestParam(required = false) String title,
             @RequestParam(required = false) String author,
+            @RequestParam int page,
+            @RequestParam int limit,
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) String fromDate,
             @RequestParam(defaultValue = "publishedAt") String sortBy,
             @RequestParam(defaultValue = "desc") String order
     ) {
-        List<CategorizedArticle> categorizedNews = newsService.getNews(category, title, author, fromDate, sortBy, order);
+        List<CategorizedArticle> categorizedNews = newsService.getNews(category, title, author, fromDate, sortBy, order, page, limit);
         return ResponseEntity.ok(categorizedNews);
     }
 }

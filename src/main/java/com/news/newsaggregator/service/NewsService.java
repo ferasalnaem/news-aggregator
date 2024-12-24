@@ -29,7 +29,7 @@ public class NewsService {
 
 
 
-    public List<CategorizedArticle> getNews(String category, String title, String author, String fromDate, String sortBy, String order) {
+    public List<CategorizedArticle> getNews(String category, String title, String author, String fromDate, String sortBy, String order, int page, int limit) {
 
 
         Query query = new Query();
@@ -63,6 +63,10 @@ public class NewsService {
                 throw new IllegalArgumentException("Invalid date format for 'fromDate'. Expected format: yyyy-MM-dd", e);
             }
         }
+
+        // Pagination logic (skip and limit)
+        query.skip(page * limit);  // Skip articles for previous pages
+        query.limit(limit);  // Limit the number of articles per page
 
         // Add sorting
         if (sortBy != null && order != null) {
