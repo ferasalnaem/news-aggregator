@@ -31,7 +31,7 @@ public class NewsApiAdapterImpl implements NewsApiAdapter {
             // Create the request URL with query parameters.
             // Add "pageSize=20" to limit the number of articles retrieved.
 
-            String url = String.format("%s?country=%s&pageSize=20&apiKey=%s", apiUrl, country, apiKey);
+            String url = String.format("%s?country=%s&pageSize=50&apiKey=%s", apiUrl, country, apiKey);
 
             // Use RestTemplate to send the HTTP GET request.
             RestTemplate restTemplate = new RestTemplate();
@@ -49,6 +49,7 @@ public class NewsApiAdapterImpl implements NewsApiAdapter {
 
                     // Map JSON fields to the UncategorisedArticle object.
                     UncategorizedArticle article = new UncategorizedArticle();
+                    article.setId(articleJson.optString("url"));
                     article.setTitle(articleJson.optString("title"));
                     article.setDescription(articleJson.optString("description"));
                     article.setContent(articleJson.optString("content"));

@@ -3,6 +3,7 @@ package com.news.newsaggregator.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -29,8 +30,8 @@ public class UncategorizedArticle {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String url) {
+        this.id = DigestUtils.sha256Hex(url);;
     }
 
     public String getTitle() {

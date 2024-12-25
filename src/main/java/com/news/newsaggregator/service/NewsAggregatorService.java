@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
 /*
 This service fetches news from external APIs
  */
@@ -28,8 +30,16 @@ public class NewsAggregatorService {
     public void aggregateAndStoreArticles(String country) {
         List<UncategorizedArticle> articles = newsApiAdapter.fetchArticles(country);
 
-        // Save the uncategorized articles to the MongoDB database
-        uncategorizedArticleRepository.saveAll(articles);
+
+        // Filter out articles that already exist in the database
+        List<UncategorizedArticle> newArticles = articles.stream()
+                .filter(article -> !uncategorizedArticleRepository.existsById(article.getId()))
+                .collect(Collectors.toList());
+
+        // Save only new articles
+        if (!newArticles.isEmpty()) {
+            uncategorizedArticleRepository.saveAll(newArticles);
+        }
     }
 
     // This method can be used to aggregate and store articles from multiple sources
