@@ -46,19 +46,13 @@ public class NewsService {
         }
         if (fromDate != null) {
             try {
-                // Parse the input date string
-                LocalDate date = LocalDate.parse(fromDate);
 
                 // Define the start and end of the day
-                LocalDateTime startOfDay = date.atStartOfDay();
-                LocalDateTime endOfDay = date.plusDays(1).atStartOfDay().minusNanos(1);
-
-                // Convert to UTC
-                Instant startInstant = startOfDay.toInstant(ZoneOffset.UTC);
-                Instant endInstant = endOfDay.toInstant(ZoneOffset.UTC);
-
+                LocalDateTime startOfDay = LocalDate.parse(fromDate).atStartOfDay();
+                LocalDateTime endOfDay = startOfDay.plusDays(1).minusNanos(1);
                 // Add range criteria to query
-                query.addCriteria(Criteria.where("publishedAt").gte(startInstant).lte(endInstant));
+                query.addCriteria(Criteria.where("publishedAt").gte(startOfDay).lte(endOfDay));
+
             } catch (DateTimeParseException e) {
                 throw new IllegalArgumentException("Invalid date format for 'fromDate'. Expected format: yyyy-MM-dd", e);
             }
