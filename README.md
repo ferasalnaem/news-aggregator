@@ -4,11 +4,11 @@ The backend provides a RESTful API for retrieving news articles.
 
 - ## Endpoint for fetching news via NewsApi:
   
-    Post <baseUrl>/api/aggregator/fetch
+    Post &lt;baseUrl>/api/aggregator/fetch
 
 - ## Endpoint for retrieving categorized news:
 
-    Get <baseUrl>/api/news
+    Get &lt;baseUrl>/api/news
 
 
 ### Parameters:
@@ -26,7 +26,7 @@ The backend provides a RESTful API for retrieving news articles.
 
 Sample Request:
 
-curl -i 'http://<baseUrl>/api/news?sortBy=publishedAt&page=0&limit=20'
+curl -i 'http://&lt;baseUrl>/api/news?sortBy=publishedAt&page=0&limit=20'
 Response Example:
 
 
