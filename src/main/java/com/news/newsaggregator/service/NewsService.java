@@ -1,9 +1,7 @@
 package com.news.newsaggregator.service;
 
 import com.news.newsaggregator.model.CategorizedArticle;
-import com.news.newsaggregator.model.UncategorizedArticle;
 import com.news.newsaggregator.repository.CategorizedArticleRepository;
-import com.news.newsaggregator.repository.UncategorizedArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,10 +9,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
